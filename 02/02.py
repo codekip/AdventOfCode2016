@@ -12,6 +12,48 @@ testcase = '''ULL
               UUUUD '''
 
 
+def get_position(current, letter):
+    split = list(letter)
+    func = {
+        'U': up,
+        'L': left,
+        'D': down,
+        'R': right
+    }
+    for char in split:
+        next = func[char]
+        current = next(current, char)
+    return current
+
+
+def up(current, letter):
+    if current in [1, 2, 3]:
+        return current
+    else:
+        return current - 3
+
+
+def left(current, letter):
+    if current in [1, 4, 7]:
+        return current
+    else:
+        return current - 1
+
+
+def down(current, letter):
+    if current in [7, 8, 9]:
+        return current
+    else:
+        return current + 3
+
+
+def right(current, letter):
+    if current in [3, 6, 9]:
+        return current
+    else:
+        return current + 1
+
+
 class TestPasscode(unittest.TestCase):
 
     def test_up(self):
@@ -43,69 +85,22 @@ class TestPasscode(unittest.TestCase):
         self.assertEqual(right(6, 'D'), 6)
         self.assertEqual(right(9, 'D'), 9)
 
-    def test_multiple_letters(self):
-        self.assertEqual(multiple_letters(5,'ULL'),1)
-        self.assertEqual(multiple_letters(1, 'RRDDD'), 9)
-        self.assertEqual(multiple_letters(9, 'LURDL'), 8)
-        self.assertEqual(multiple_letters(8, 'UUUUD'), 5)
-        
-
-def up(current, letter):
-    if current in [1, 2, 3]:
-        return current
-    else:
-        return current - 3
+    def test_get_position(self):
+        self.assertEqual(get_position(5, 'ULL'), 1)
+        self.assertEqual(get_position(1, 'RRDDD'), 9)
+        self.assertEqual(get_position(9, 'LURDL'), 8)
+        self.assertEqual(get_position(8, 'UUUUD'), 5)
 
 
-def left(current, letter):
-    if current in [1, 4, 7]:
-        return current
-    else:
-        return current - 1
+class Test_Answer(unittest.TestCase):
+    pos = list()
+    digit = 5
+    instr = instructions.split("\n")
+    for line in instr:
+        digit = get_position(digit, line)
+        pos.append(digit)
+    print(pos)
 
-
-def down(current, letter):
-    if current in [7, 8, 9]:
-        return current
-    else:
-        return current + 3
-
-
-def right(current, letter):
-    if current in [3, 6, 9]:
-        return current
-    else:
-        return current + 1
-
-
-def multiple_letters(current,letter):
-    split = list(letter)
-    func = {
-           'U':up,
-           'L':left,
-           'D':down,
-           'R':right
-        }        
-    for char in split:
-        next = func[char]
-        current = next(current,char)
-    return current
-
-
-def return_code(current, letter): #TODO - create test
-    split = list(letter)
-    func = {
-        'U': up,
-        'L': left,
-        'D': down,
-        'R': right
-    }
-    code = list() 
-    for char in split:
-        next = func[char]
-        current = next(current, char)
-        code.append(current)
-    return code
 
 if __name__ == '__main__':
     unittest.main()
