@@ -45,6 +45,10 @@ class TestPasscode(unittest.TestCase):
 
     def test_multiple_letters(self):
         self.assertEqual(multiple_letters(5,'ULL'),1)
+        self.assertEqual(multiple_letters(1, 'RRDDD'), 9)
+        self.assertEqual(multiple_letters(9, 'LURDL'), 8)
+        self.assertEqual(multiple_letters(8, 'UUUUD'), 5)
+        
 
 def up(current, letter):
     if current in [1, 2, 3]:
