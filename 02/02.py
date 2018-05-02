@@ -43,6 +43,9 @@ class TestPasscode(unittest.TestCase):
         self.assertEqual(right(6, 'D'), 6)
         self.assertEqual(right(9, 'D'), 9)
 
+    def test_multiple_letters(self):
+        self.assertEqual(multiple_letters(5,'ULL'),1)
+
 def up(current, letter):
     if current in [1, 2, 3]:
         return current
@@ -70,6 +73,19 @@ def right(current, letter):
     else:
         return current + 1
 
+
+def multiple_letters(current,letter):
+    split = list(letter)
+    func = {
+           'U':up,
+           'L':left,
+           'D':down,
+           'R':right
+        }        
+    for char in split:
+        next = func[char]
+        current = next(current,char)
+    return current
 
 
 if __name__ == '__main__':
