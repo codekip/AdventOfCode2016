@@ -92,5 +92,20 @@ def multiple_letters(current,letter):
     return current
 
 
+def return_code(current, letter): #TODO - create test
+    split = list(letter)
+    func = {
+        'U': up,
+        'L': left,
+        'D': down,
+        'R': right
+    }
+    code = list() 
+    for char in split:
+        next = func[char]
+        current = next(current, char)
+        code.append(current)
+    return code
+
 if __name__ == '__main__':
     unittest.main()
