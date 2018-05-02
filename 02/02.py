@@ -36,7 +36,7 @@ class TestPasscode(unittest.TestCase):
         self.assertEqual(down(7, 'D'), 7)
         self.assertEqual(down(9, 'D'), 9)
 
-    def test_down(self):
+    def test_right(self):
         self.assertEqual(right(1, 'D'), 2)
         self.assertEqual(right(2, 'D'), 3)
         self.assertEqual(right(5, 'D'), 6)
