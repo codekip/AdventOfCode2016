@@ -6,19 +6,71 @@ UURDRRUDLURRDDDLUDLRDURUDURDLLLLRDLRLRDDRDRDUUULRDLLDLULULRDUDDRRUUDURULDLUDLRDR
 URDRDLLRDDDLLLDDLURLRURUURRRLUURURDURRLLUDURRLRLDLUURDLULRRDRUDDLULDLDRLDLRLRRLLLDDDUDDDLRURURRLLDRRRURUDLRDDLLDULDDLDRLUUUDRRRULDUULRDDDLRRLLURDDURLULRDUDURRLLDLLRLDUDDRRDDLRLLLDUDRLUURRLLDULRLDLUUUUUDULUDLULUDDUURRURLDLDRRLDLRRUDUDRRDLDUDDLULLDLLRDRURDRDRRLDDDDRDDRLLDDDLLUDRURLURDRRRRRUDDDUDUDDRDUUDRRUDUDRLULDDURULUURUUUURDRULRLRULLDDRRRUULRRRRURUDLDLRDLLDRLURLRUULLURDUDULRRURLRLLRRLLLURULRRRLDDUULLUUULRRDRULUUUUDRDRRDLRURLRLLRLRRRDRDRLDLUURUURULLDLULRRLRRDRULRRLLLDDURULLDLDLDLUUURDLDLUUDULRLLUDDRRDLLDLDLDURLUURRDDRRURDRLUDRLUUUDLDULDLUDRLDUDDLLRUDULLLLLDRRLLUULLUUURRDDUURDLLRDDLRLLU
 LDUDRRDLUUDDRLLUUULURLDUDLUDLRLDRURLULRLLDDLRRUUUDDDDRDULDDUUDLRUULDRULLRDRUDDURLDUUURRUDUDRDRDURRDLURRRDRLDLRRRLLLRLURUURRDLLRDLDDLLRDUDDRDUULRULRRURLUDDUDDDUULLUURDULDULLLLRUUUDDRRRLDDDLDLRRDRDRDLUULRLULDRULDLRDRRUDULUDLLUDUULRDLRRUUDDLLDUDDRULURRLULDLDRRULDDRUUDDLURDLRDRLULRRLURRULDUURDLUDLLDRLDULLULDLLRDRDLLLUDLRULLRLDRDDDLDDDLRULDLULLRUUURRLLDUURRLRLDUUULDUURDURRULULRUUURULLLRULLURDDLDRLLRDULLUDLDRRRLLLLDUULRRLDURDURDULULDUURLDUDRLRURRDLUUULURRUDRUUUDRUR'''
 
-def split_instructions():
-    parent = list()
-    start = 0
-    while start < len(instructions):
-        part = list()
-        part.append(instructions[start:4])
-        parent.append(part)
-        start = instructions.index(part[-1])
+testcase = '''ULL
+              RRDDD
+              LURDL
+              UUUUD '''
 
-split_instructions()
 
-def main():
-    split_instructions
+class TestPasscode(unittest.TestCase):
+
+    def test_up(self):
+        self.assertEqual(up(5, 'U'), 2)
+        self.assertEqual(up(7, 'U'), 4)
+        self.assertEqual(up(9, 'U'), 6)
+        self.assertEqual(up(1, 'U'), 1)
+        self.assertEqual(up(2, 'U'), 2)
+        self.assertEqual(up(3, 'U'), 3)
+
+    def test_left(self):
+        self.assertEqual(left(5, 'L'), 4)
+        self.assertEqual(left(7, 'L'), 7)
+        self.assertEqual(left(9, 'L'), 8)
+        self.assertEqual(left(1, 'L'), 1)
+        self.assertEqual(left(4, 'L'), 4)
+
+    def test_down(self):
+        self.assertEqual(down(1, 'D'), 4)
+        self.assertEqual(down(2, 'D'), 5)
+        self.assertEqual(down(5, 'D'), 8)
+        self.assertEqual(down(7, 'D'), 7)
+        self.assertEqual(down(9, 'D'), 9)
+
+    def test_down(self):
+        self.assertEqual(right(1, 'D'), 2)
+        self.assertEqual(right(2, 'D'), 3)
+        self.assertEqual(right(5, 'D'), 6)
+        self.assertEqual(right(6, 'D'), 6)
+        self.assertEqual(right(9, 'D'), 9)
+
+def up(current, letter):
+    if current in [1, 2, 3]:
+        return current
+    else:
+        return current - 3
+
+
+def left(current, letter):
+    if current in [1, 4, 7]:
+        return current
+    else:
+        return current - 1
+
+
+def down(current, letter):
+    if current in [7, 8, 9]:
+        return current
+    else:
+        return current + 3
+
+
+def right(current, letter):
+    if current in [3, 6, 9]:
+        return current
+    else:
+        return current + 1
+
+
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
