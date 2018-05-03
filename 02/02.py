@@ -93,13 +93,13 @@ class TestPasscode(unittest.TestCase):
 
 
 class Test_Answer(unittest.TestCase):
-    pos = list()
+    code = list()
     digit = 5
     instr = instructions.split("\n")
     for line in instr:
         digit = get_position(digit, line)
-        pos.append(digit)
-    print(pos)
+        code.append(digit)
+    print(code)
 
 
 if __name__ == '__main__':
