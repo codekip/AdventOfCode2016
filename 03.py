@@ -1925,12 +1925,8 @@ def istriangle(shape):
         return shape
 
 def main():
-    triangles = list()
-    for shape in shapes:
-        shape = sorted(shape)
-        if istriangle(shape):
-            triangles.append(shape)
-    print(len(triangles))
+  triangles = [shape for shape in shapes if istriangle(sorted(shape)) ]
+  print(len(triangles))
 
 
 if __name__ == '__main__':
