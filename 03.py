@@ -1923,11 +1923,12 @@ def istriangle(shape):
     if (shape[0] + shape[1]) > shape[2]:
         return shape
 
-def main():
-    newlist = [int(b) for b in [a.rstrip() for a in shapes.split(' ') if a != ''] if b!=''] #everything in one list
 
-    #print(newlist)
-    #chunks = [newlist[x:x+3] for x in range(0,len(newlist),3)] #list of lists
+def main():
+    newlist = [int(b) for b in [a.rstrip() for a in shapes.split(
+        ' ') if a != ''] if b != '']  # everything in one list
+
+    # split into 3 lists
     one = newlist[0::3]
     two = newlist[1::3]
     three = newlist[2::3]
@@ -1936,12 +1937,14 @@ def main():
     listtwo = [two[x:x+3] for x in range(0, len(two), 3)]
     listthree = [three[x:x+3] for x in range(0, len(three), 3)]
 
-    all = list(zip(listone,listtwo,listthree))
-    al = [item for sublist in all for item in sublist]
-    print(al)
-    #t = zip(chunks)
-    #a,b,c = t
-    #print(chunks)
+    all = list(zip(listone, listtwo, listthree))  # combine the 3
+    al = [item for sublist in all for item in sublist]  # Flatten zip
+
+    triangles = list()
+    for shape in al:
+        if istriangle(sorted(shape)):
+            triangles.append(shape)
+    print(len(triangles))
 
 
 if __name__ == '__main__':
