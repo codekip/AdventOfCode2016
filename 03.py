@@ -1940,10 +1940,7 @@ def main():
     all = list(zip(listone, listtwo, listthree))  # combine the 3
     al = [item for sublist in all for item in sublist]  # Flatten zip
 
-    triangles = list()
-    for shape in al:
-        if istriangle(sorted(shape)):
-            triangles.append(shape)
+    triangles = [shape for shape in al if istriangle(sorted(shape))]
     print(len(triangles))
 
 
