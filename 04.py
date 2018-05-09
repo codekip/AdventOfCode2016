@@ -41,7 +41,39 @@ class TestPuzzle(unittest.TestCase):
             for line in file:
                 if is_real_room(line):
                     summed.append(get_ID(line))
-        print(sum_values(summed))
+        #print(sum_values(summed))
+
+
+class Decrypt(unittest.TestCase):
+
+    def test_position(self):
+        self.assertEqual(position('a'), 0)
+        self.assertEqual(position('e'), 4)
+        self.assertEqual(position('z'), 25)
+
+class TestDecryption(unittest.TestCase):
+
+    def decryption(self):
+        with open('04.txt','r') as file:
+            for room in file:
+                if is_real_room(room):
+                    id = get_ID(room)
+                    name = ''.join([char for char in room if char in ascii_lowercase or char == '-'])
+                    newname = rotate(name,id)
+                    print(newname)
+
+
+def rotate(name,times):
+    new = list()
+    for char in name:
+        start = position(char)
+        end = (start + times) % 26
+        new.append(ascii_lowercase[end])
+    return new
+
+
+def position(char):
+    return ascii_lowercase.index(char)
 
 
 def sum_values(lst):
