@@ -53,28 +53,34 @@ class Decrypt(unittest.TestCase):
 
 class TestDecryption(unittest.TestCase):
 
-    def decryption(self):
+    def test_decryption(self):
         with open('04.txt','r') as file:
+            count = 0
             for room in file:
                 if is_real_room(room):
                     id = get_ID(room)
                     name = ''.join([char for char in room if char in ascii_lowercase or char == '-'])
                     newname = rotate(name,id)
                     print(newname)
+        if count = 0:
+            self.assertEqual(newname, 'rampaging projectile rabbit training iragn')
+            
 
 
 def rotate(name,times):
-    new = list()
+    newname = list()
     for char in name:
-        start = position(char)
-        end = (start + times) % 26
-        new.append(ascii_lowercase[end])
-    return new
+        if char == '-':
+            newname.append(' ')
+        else:
+            start = position(char)
+            end = (start + times) % 26
+            newname.append(ascii_lowercase[end])
+    return ''.join(newname)
 
 
 def position(char):
     return ascii_lowercase.index(char)
-
 
 def sum_values(lst):
     return reduce(lambda x, y: x + y, lst)
